@@ -1,0 +1,59 @@
+msName: Customer
+cmpName: Customer
+jasypt:
+  encryptor:
+    bean: jasyptEncryptorAES
+spring:
+  application:
+    name: SpringTest
+  datasource:
+    url: jdbc:log4jdbc:mysql://database-1.cf80k2uc8jln.ap-southeast-2.rds.amazonaws.com/spring_test?useSSL=false&alowMultiQueries=ture&allowPublicKeyRetrieval=true
+    username: ENC(FLuFXcRJ5Z7xrjRsITziIiD4FjE9nUJlHUigJV/57KNCvZxKqsIR1Kz/nvbbX9lX)
+    password: ENC(eFp5jEFDwhvp/PsVs03m9Q9GyC+FjNomISvhanPFMMB70MobsQlsVn+s7cRAh5FS)
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+  kafka:
+    bootstrap-servers: 127.0.0.1:9092
+server:
+  port: 8088
+mybatis:
+  mapper-locations: /mybatis/mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, prometheus
+logging:
+  file:
+    path: C:log
+  level:
+    root: INFO
+    com:
+      zaxxer:
+        hikari: INFO
+    jdbc:
+      audit: 'OFF'
+      resultset: 'OFF'
+      resultsettable: INFO
+      sqlonly: INFO
+      sqltiming: INFO
+      connection: 'OFF'
+    javax:
+      sql:
+        DataSource: 'OFF'
+
+log4jdbc:
+  spy:
+    log4j2:
+      formatSql: true
+log4j:
+  debug: false
+

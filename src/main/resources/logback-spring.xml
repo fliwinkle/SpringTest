@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 60초마다 설정 파일의 변경을 확인 하여 변경시 갱신 -->
+<configuration>
+    <!--로그 파일 저장 위치 -->
+    <property resource ="application.yml"/>
+     <!--<springProperty scope="context" name="LOG_LEVEL" source="logging.level.root"/>-->
+	
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        	<encoder>
+				<pattern>[%d{yyyy-MM-dd'T'HH:mm:ss.SSSSSS}]%green(%d-5level) %cyan(%logger{35}) %magenta([%M] [%L line])
+	                - %msg %n
+				</pattern>
+			</encoder>
+	</appender>
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+          <file>${LOGS_PATH}/default.log</file>
+          <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+              <fileNamePattern>${LOGS_PATH}/default-%d{yyyy-MM-dd}.log</fileNamePattern>
+              <maxHistory>7</maxHistory>
+          </rollingPolicy>  
+		    <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+				<timestampPattern>yyyy-MM-dd'T'HH:mm:ss.SSSSSS</timestampPattern>
+		        <includeMdcKeyName>traceId</includeMdcKeyName>
+		        <includeMdcKeyName>userId</includeMdcKeyName>
+		        <includeMdcKeyName>msName</includeMdcKeyName>
+		        <includeMdcKeyName>cmpName</includeMdcKeyName>
+		        <includeMdcKeyName>cmpId</includeMdcKeyName>
+		        <includeMdcKeyName>apiId</includeMdcKeyName>
+				<fieldNames> 
+                	<timestamp>timestamp</timestamp>
+                	<thread>[ignore]</thread>
+                	<logger>[ignore]</logger>
+                	<version>[ignore]</version>
+                	<levelValue>[ignore]</levelValue>
+                	<message>message</message>
+            	</fieldNames>
+				<jsonGeneratorDecorator class="net.logstash.logback.decorate.CompositeJsonGeneratorDecorator">
+        			<decorator class="net.logstash.logback.decorate.PrettyPrintingJsonGeneratorDecorator"/>
+    			</jsonGeneratorDecorator>
+		    </encoder>
+      </appender>
+      <appender name="jsonConsole" class="ch.qos.logback.core.ConsoleAppender">
+		    <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+				<timestampPattern>yyyy-MM-dd'T'HH:mm:ss.SSSSSS</timestampPattern>
+<!--		        <includeMdcKeyName>traceId</includeMdcKeyName>
+		        <includeMdcKeyName>userId</includeMdcKeyName>
+		        <includeMdcKeyName>msName</includeMdcKeyName>
+		        <includeMdcKeyName>cmpName</includeMdcKeyName>
+		        <includeMdcKeyName>cmpId</includeMdcKeyName>
+		        <includeMdcKeyName>apiId</includeMdcKeyName>-->
+				<fieldNames> 
+                	<timestamp>timestamp</timestamp>
+                	<thread>[ignore]</thread>
+                	<logger>[ignore]</logger>
+                	<version>[ignore]</version>
+                	<levelValue>[ignore]</levelValue>
+                	<message>message</message>
+            	</fieldNames>
+				<!--<jsonGeneratorDecorator class="net.logstash.logback.decorate.CompositeJsonGeneratorDecorator">
+        			<decorator class="net.logstash.logback.decorate.PrettyPrintingJsonGeneratorDecorator"/>
+    			</jsonGeneratorDecorator>-->
+		    </encoder>
+      </appender>
+
+    <logger name="com.example.demo" level="DEBUG" additivity="false">
+		<!--<appender-ref ref="jsonConsole"/>-->
+		<appender-ref ref="FILE"/>
+		<appender-ref ref="STDOUT"/>
+    </logger>
+
+    <root level="${LOG_LEVEL}" additivity="false">
+        <!--<appender-ref ref="jsonConsole"/>-->
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
