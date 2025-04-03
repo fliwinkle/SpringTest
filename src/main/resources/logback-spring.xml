@@ -64,13 +64,13 @@
 
     <logger name="com.example.demo" level="DEBUG" additivity="false">
 		<!--<appender-ref ref="jsonConsole"/>-->
-		<appender-ref ref="FILE"/>
+		<!--<appender-ref ref="FILE"/>-->
 		<appender-ref ref="STDOUT"/>
     </logger>
 
     <root level="${LOG_LEVEL}" additivity="false">
         <!--<appender-ref ref="jsonConsole"/>-->
-        <appender-ref ref="FILE"/>
+        <!--<appender-ref ref="FILE"/>-->
         <appender-ref ref="STDOUT"/>
     </root>
 </configuration>
