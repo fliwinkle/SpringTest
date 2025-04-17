@@ -36,7 +36,7 @@ public class CustomerServiceImpl implements CustomerService{
 		String rgno = input.getRgno();
 		
 		Customer customer = Customer.builder().custId(custId).password(password).rgno(rgno).build();
-		
+		;
 		return customerJpa.save(customer);
 		
 	}

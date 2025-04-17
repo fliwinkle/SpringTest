@@ -21,4 +21,6 @@ public class CustomerDto {
 		this.password = password;
 		this.rgno = rgno;
 	}
+    @Builder
+    public CustomerDto() {}
 }

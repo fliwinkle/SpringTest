@@ -1,7 +1,5 @@
 package com.example.st.domain;
 
-import java.util.Optional;
-
 import com.example.st.dto.CustomerDto;
 import com.example.st.entity.Customer;
 

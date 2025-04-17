@@ -17,12 +17,10 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class CommonDataAspect {
 
-	//@Before("execution(* com.mirae.micros..application.controller.*Controller.*(..))")
-	@Before("execution(* com.example.demo.controller.*Controller.*(..))")
+	@Before("execution(* com.example.st.controller.*Controller.*(..))")
 	public void setCustomContext() {
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 		String userId = request.getHeader("userId");
-		String syncId = request.getHeader("syncId");
 		String channel = request.getHeader("channel");
 		String traceId = request.getHeader("traceId");
 		

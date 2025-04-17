@@ -1,20 +1,14 @@
 package com.example.st.entity;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters.LocalDateConverter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.example.st.context.CommonContext;
 import com.example.st.context.CommonContextHolder;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.annotation.PostConstruct;
 import jakarta.persistence.Column;
-import jakarta.persistence.Convert;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
@@ -25,9 +19,12 @@ import lombok.Getter;
 public abstract class BaseEntity {
 	@Column(name = "INPP_CD", nullable = false)
 	@LastModifiedDate
+	@JsonIgnore //조회 불가 데이터 확인용
 	private LocalDateTime inppCd;
 
+	
 	@Column(name = "INPP_USER")
+	@JsonIgnore
     private String inppUser;
 
     public BaseEntity() {
